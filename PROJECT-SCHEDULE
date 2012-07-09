@@ -1,7 +1,20 @@
 **Crazy Classroom**
 
 a. Modeling
+	- Classrooms Occupation
+	- Classrooms
+		* ID
+		* Room Type
+		* Room Name
+		* Area
+	- Areas: Make groups for classrooms (which may be used in room determining algorithm)
 
 b. User Interfaces
+	- Start search
+	- Classrooms result list
+	- Classroom detail
+		* Current Status
+		* Upcoming Events
+		* Maintainer
 
 c. Time Tables
