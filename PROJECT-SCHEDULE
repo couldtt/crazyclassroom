@@ -2,11 +2,33 @@
 
 a. Modeling
 	- Classrooms Occupation
+		* Maintainer (Who occupated)
+		* Start Time
+		* End Time 
+		* Classroom ID
+
+		Note: Time format is the main point. 
+
+
+	- Regular Occupation
+		* Classroom ID
+		* Time Span (Example Fri 1,2)
+		* Course Name
+		* School (Example: School Of Foreign Language. Can be enumeration type)
+
 	- Classrooms
-		* ID
-		* Room Type
-		* Room Name
-		* Area
+		* ID (An unique integer)
+		* Room Type (Normal, multimedia, etc.)
+		* Room Name (101, 102)
+		* Area (Liangxiang or Zhongguancun)
+		* Capacity (Example: 100 people)
+		* Building (Example: 4#)
+		* Air-condition (Bool)
+		* Floor (Example: 2F)
+
+		Note: IMO some data redundancy can make searching easily.
+
+
 	- Areas: Make groups for classrooms (which may be used in room determining algorithm)
 
 b. User Interfaces
@@ -16,5 +38,6 @@ b. User Interfaces
 		* Current Status
 		* Upcoming Events
 		* Maintainer
+
 
 c. Time Tables
