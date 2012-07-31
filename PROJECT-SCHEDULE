@@ -2,35 +2,33 @@
 
 a. Modeling
 	- Classrooms Occupation
-		* Maintainer (Who occupated)
-		* Start Time
-		* End Time 
+		* Maintainer (Name of Department / School / StudentSociety)
+		* Time Span (Example Fri 1,2) --> Similiar as the way Calendar software does
 		* Classroom ID
-
-		Note: Time format is the main point. 
-
-
-	- Regular Occupation
-		* Classroom ID
-		* Time Span (Example Fri 1,2)
-		* Course Name
-		* School (Example: School Of Foreign Language. Can be enumeration type)
+		* OccupationType (Class / Events) --> To be specific
+		* Meta (Use json to save detail information such as classID/eventName)
+		Todo:
+			1.Refer Calendar software 's database;
+			2.Make a detail list of occupation types.
 
 	- Classrooms
-		* ID (An unique integer)
-		* Room Type (Normal, multimedia, etc.)
-		* Room Name (101, 102)
-		* Area (Liangxiang or Zhongguancun)
+		* ID (An unique integer) int
+		* Room Name (101, 102) string
+		* Campus (Liangxiang or Zhongguancun) --> Hard code the list
 		* Capacity (Example: 100 people)
-		* Building (Example: 4#)
-		* Air-condition (Bool)
-		* Floor (Example: 2F)
-
-		Note: IMO some data redundancy can make searching easily.
-
+		* Room Facilities (Projector, Remote Microphone, Computer, 
+							Video Recorder, Air-Conditioner, Fan, etc.)
+		* BuildingID
+		* Floor (Example: 2F) float
 
 	- Areas: Make groups for classrooms (which may be used in room determining algorithm)
-
+		* Temperature
+		* Sunshine Time Span
+			+ Solar Elevation Angle
+			+ Height of the Obtruct outside
+	- Building
+		* Hours (Open/Close Time)
+	
 b. User Interfaces
 	- Start search
 	- Classrooms result list
