@@ -29,15 +29,11 @@ function p($s = "Arrive here!") {
 	dump($s);
 	exit;
 }
-protected function ajaxReturn($data,$info='',$status=1,$type='') {
+function Ajax($data,$info='',$status=1,$type='JSON') {
 	$result  =  array();
 	$result['status']  =  $status;
 	$result['info'] =  $info;
 	$result['data'] = $data;
-	//扩展ajax返回数据, 在Action中定义function ajaxAssign(&$result){} 方法 扩展ajax返回数据。
-	if(method_exists($this,"ajaxAssign")) 
-		$this->ajaxAssign($result);
-	if(empty($type)) $type  =   C('DEFAULT_AJAX_RETURN');
 	if(strtoupper($type)=='JSON') {
 		// 返回JSON数据格式到客户端 包含状态信息
 		header("Content-Type:text/html; charset=utf-8");
@@ -51,6 +47,7 @@ protected function ajaxReturn($data,$info='',$status=1,$type='') {
 		header("Content-Type:text/html; charset=utf-8");
 		exit($data);
 	}else{
+	
 	}
 }
 ?>

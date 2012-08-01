@@ -1,7 +1,7 @@
 <?php
 class TestAction {
 	function a() {
-		echo "OK";
+		Ajax(null, 'Test OK', 1);
 	}
 }
 ?>
