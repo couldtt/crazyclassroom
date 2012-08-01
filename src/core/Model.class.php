@@ -1,6 +1,6 @@
 <?php
 	require_once("/../db/Db.class.php");
-	Abstract class Model extends Db{
+	class Model extends Db{
 		function __construct($name = '') {
 			$config = require_once('/../conf/config.php');
 			$this->connect($config); //连接数据库
