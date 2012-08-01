@@ -52,18 +52,23 @@ function Ajax($data,$info='',$status=1,$type='JSON') {
 }
 //快速实例化一个Model
 function D($name) {
-	require_once('/../core/Model.class.php');
+	require_once('./core/Model.class.php');
 	static $_model = array();
 	if (isset($_model[$name]))
 		return $_model[$name];
 	$OriClassName = $name;
 	$className = $name."Model";
-	require_once('/../lib/Model/' . $name . 'Model.class.php');
-	if (class_exists($className)) {
-		$model = new $className();
-	} else {
-		return;
+	$fileName = './lib/Model/' . $name . 'Model.class.php';
+	if(file_exists($fileName)) {
+		require_once($fileName);
+		if (class_exists($className)) {
+			$model = new $className();
+		} else {
+			return;
+		}
 	}
+	else
+		$model = new Model($OriClassName);
 	$_model[$OriClassName] = $model;
 	return $model;
 }
