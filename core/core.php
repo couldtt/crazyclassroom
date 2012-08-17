@@ -20,12 +20,26 @@ class App {
 		// URL解析后的的字符串数组，分别提取出各个部分
 		$this->_controller = !empty($splits[0])?$splits[0]:'index';
 		//提取action的名字，如果URL格式不对这里提取的名字是index
-		if(!($len = strpos($splits[1], "?")))
-			$len = strlen($splits[1]);
-		$actionStr = substr($splits[1], 0, $len);
+		$actionStr = substr($splits[1], 0, strpos($splits[1], "?"));
 		$this->_action = !empty($actionStr)?$actionStr:'index';
+		//提取传递过来的参数，以键值对的形式存在，所以要分别提取并放入数组中
+		$kvStr = substr($splits[1], strpos($splits[1], "?") + 1, strlen($splits[1]) - 1);
+		//提取键值对
+		$kvStr = explode('&', $kvStr);
+		if(!empty($kvStr)) {
+			//构造两个数组，一个用于放键串，另一个用放值。
+			$keys = $values = array();
+			/*遍历URL解析后的字符串数组，从第二位开始（索引第一位是控制器名，第二位是action名其余的应该是参数对）*/
+			for($i = 0; $i < count($kvStr); ++$i) {
+				$temp = explode('=', $kvStr[$i]);
+				$keys[] = $temp[0];
+				$values[] = $temp[1];
+			}
+			//合并键值对数组为一个数组，php中的数组兼有其他语言hashtable的功能。
+			$this->_params = array_combine($keys, $values);
+		}
 		//指派具体函数
-		$controllerFile = "/../lib/Action/{$this->_controller}Action.class.php";
+		$controllerFile = "/../lib/{$this->_controller}Action.class.php";
 		if(!file_exists($controllerFile)) {
 			require_once($controllerFile);
 			$controller = "{$this->_controller}Action";
