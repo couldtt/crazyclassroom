@@ -1,28 +1,28 @@
 <?php
 // 浏览器友好的变量输出
 function dump($var, $echo=true, $label=null, $strict=true) {
-    $label = ($label === null) ? '' : rtrim($label) . ' ';
-    if (!$strict) {
-        if (ini_get('html_errors')) {
-            $output = print_r($var, true);
-            $output = "<pre>" . $label . htmlspecialchars($output, ENT_QUOTES) . "</pre>";
-        } else {
-            $output = $label . print_r($var, true);
-        }
-    } else {
-        ob_start();
-        var_dump($var);
-        $output = ob_get_clean();
-        if (!extension_loaded('xdebug')) {
-            $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
-            $output = '<pre>' . $label . htmlspecialchars($output, ENT_QUOTES) . '</pre>';
-        }
-    }
-    if ($echo) {
-        echo($output);
-        return null;
-    }else
-        return $output;
+	$label = ($label === null) ? '' : rtrim($label) . ' ';
+	if (!$strict) {
+		if (ini_get('html_errors')) {
+			$output = print_r($var, true);
+			$output = "<pre>" . $label . htmlspecialchars($output, ENT_QUOTES) . "</pre>";
+		} else {
+			$output = $label . print_r($var, true);
+		}
+	} else {
+		ob_start();
+		var_dump($var);
+		$output = ob_get_clean();
+		if (!extension_loaded('xdebug')) {
+			$output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
+			$output = '<pre>' . $label . htmlspecialchars($output, ENT_QUOTES) . '</pre>';
+		}
+	}
+	if ($echo) {
+		echo($output);
+		return null;
+	}else
+		return $output;
 }
 //dump + exit
 function p($s = "Arrive here!") {
@@ -50,4 +50,27 @@ function Ajax($data,$info='',$status=1,$type='JSON') {
 	
 	}
 }
+//快速实例化一个Model
+function D($name) {
+	require_once('./core/Model.class.php');
+	static $_model = array();
+	if (isset($_model[$name]))
+		return $_model[$name];
+	$OriClassName = $name;
+	$className = $name."Model";
+	$fileName = './lib/Model/' . $name . 'Model.class.php';
+	if(file_exists($fileName)) {
+		require_once($fileName);
+		if (class_exists($className)) {
+			$model = new $className();
+		} else {
+			return;
+		}
+	}
+	else
+		$model = new Model($OriClassName);
+	$_model[$OriClassName] = $model;
+	return $model;
+}
+
 ?>
