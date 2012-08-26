@@ -1,15 +1,15 @@
 **Crazy Classroom**
 
 a. Modeling
-	- Classrooms Occupation
+	- Classroom Occupation Instances
+		* ID (An unique integer) int
 		* Maintainer (Name of Department / School / StudentSociety)
-		* Time Span (Example Fri 1,2) --> Similiar as the way Calendar software does
+		* Time Span
+			+ Start Time: datetime
+			+ End Time: datetime
 		* Classroom ID
-		* OccupationType (Class / Events) --> To be specific
+		* OccupationType (0:Unknown / 1:Class / 2:Events) int
 		* Meta (Use json to save detail information such as classID/eventName)
-		Todo:
-			1.Refer Calendar software 's database;
-			2.Make a detail list of occupation types.
 
 	- Classrooms
 		* ID (An unique integer) int
@@ -30,12 +30,18 @@ a. Modeling
 		* Hours (Open/Close Time)
 	
 b. User Interfaces
-	- Start search
-	- Classrooms result list
-	- Classroom detail
+	1. Start search by a Time Span
+	2. Classrooms result list
+	3. Classroom detail
 		* Current Status
 		* Upcoming Events
 		* Maintainer
+	4. ...
 
 
 c. Time Tables
+	1. Only query classroom occupation instances. (UI: 1, 2)
+		We do not use building information and areas, but just show the classroom.
+		No meta or occupation type need be considered.
+	2. Show meta and occupation type. (UI: 3)
+	3. ...
