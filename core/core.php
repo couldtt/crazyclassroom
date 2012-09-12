@@ -25,8 +25,8 @@ class App {
 		$actionStr = substr($splits[1], 0, $len);
 		$this->_action = !empty($actionStr)?$actionStr:'index';
 		//指派具体函数
-		$controllerFile = "/../lib/Action/{$this->_controller}Action.class.php";
-		if(!file_exists($controllerFile)) {
+		$controllerFile = "lib/Action/{$this->_controller}Action.class.php";
+		if(file_exists($controllerFile)) {
 			require_once($controllerFile);
 			$controller = "{$this->_controller}Action";
 			$action = $this->_action;
