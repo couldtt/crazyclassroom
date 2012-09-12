@@ -2,35 +2,49 @@
 
 a. Modeling
 	- Classroom Occupation Instances
-		* ID (An unique integer) int
-		* Maintainer (Name of Department / School / StudentSociety)
+		* ID (An unique integer) id - int
+		* Maintainer (Name of Department / School / StudentSociety) maintainer - char(50)
 		* Time Span
-			+ Start Time: datetime
-			+ End Time: datetime
-		* Classroom ID
-		* OccupationType (0:Unknown / 1:Class / 2:Events) int
-		* Meta (Use json to save detail information such as classID/eventName)
+			+ Start Time: start_time - datetime
+			+ End Time: end_time - datetime
+		* Classroom ID classroom_id - int
+		* OccupationType (0:Unknown / 1:Class / 2:Events) occupation_type - enum(unknown, class, event)
+		* Meta (Use json to save detail information such as classID/eventName) 
 
 	- Classrooms
-		* ID (An unique integer) int
-		* Room Name (101, 102) string
-		* Campus (Liangxiang or Zhongguancun) --> Hard code the list
-		* Capacity (Example: 100 people)
-		* Room Facilities (Projector, Remote Microphone, Computer, 
+		* ID (An unique integer) id - int
+		* Room Name (101, 102) name - char(20)
+		* Campus (Liangxiang or Zhongguancun) campus - enum('liangxiang', 'zhongguancun')
+		* Capacity (Example: 100 people) capacity - int(11)
+		-->* Room Facilities (Projector, Remote Microphone, Computer, 
 							Video Recorder, Air-Conditioner, Fan, etc.)
-		* BuildingID
+		* BuildingID building - int
+        * AreaID area - int
 		* Floor (Example: 2F) float
 
 	- Areas: Make groups for classrooms (which may be used in room determining algorithm)
+        * ID id - int
 		* Temperature
 		* Sunshine Time Span
 			+ Solar Elevation Angle
 			+ Height of the Obtruct outside
 	- Building
+        * ID
 		* Hours (Open/Close Time)
-	
-b. User Interfaces
-	1. Start search by a Time Span
+            + open_time: time
+            + close_time: time
+b. Application Interfaces	
+    crazyclassroom.classrooms.query()
+        - time_span
+        - campus
+        - bldg
+        - ...
+    crazyclassroom.classrooms.getById()
+    crazyclassroom.buildings.getById()
+    ...
+
+c. User Interfaces
+	1. Start search by a Time Span, campus
 	2. Classrooms result list
 	3. Classroom detail
 		* Current Status
@@ -39,7 +53,7 @@ b. User Interfaces
 	4. ...
 
 
-c. Time Tables
+d. Time Tables
 	1. Only query classroom occupation instances. (UI: 1, 2)
 		We do not use building information and areas, but just show the classroom.
 		No meta or occupation type need be considered.
